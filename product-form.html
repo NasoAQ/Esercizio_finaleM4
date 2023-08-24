@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Gestione prodotti</title>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="container">
+              <a class="navbar-brand" href="index.html">
+                <img src="anason-22-8-2023.png" alt="logo" width="80" height="30">
+              </a>
+            </div>
+          </nav>
+    </header>
+
+    <main class="container">
+
+        <div class="table-container table-responsive">
+
+        <h2>Prodotti inseriti</h2>
+
+        <table class="table table-dark table-sm">
+  
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Descrizione</th>
+              <th>Brand</th>
+              <th>Image</th>
+              <th>Prezzo</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+  
+          <tbody id="products-table-body">
+  
+          </tbody>
+  
+  
+        </table>
+  
+        <!-- 
+          <div class="spinner-container">
+            <div id="spinner-row" class="spinner-border" role="status">
+              <span class="visually-hidden">Caricamento...</span>
+            </div>
+          </div> 
+        -->
+  
+        </div>
+
+        <div class="container">
+
+        <h2>Compila il form per aggiungere un prodotto</h2>
+
+        <form id="product-form" class="" novalidate>
+  
+          <div class="mb-3">
+            <label for="name" class="form-label">Nome prodotto</label>
+            <input type="text" class="form-control" id="name" required>
+            <span class="text-danger" id="name-error"></span>
+          </div>
+  
+          <div class="mb-3">
+            <label for="description" class="form-label">Descrizione</label>
+            <input type="text" class="form-control" id="description" required>
+            <span class="text-danger" id="description-error"></span>
+          </div>
+  
+          <div class="mb-3">
+            <label for="brand" class="form-label">Brand</label>
+            <input type="text" class="form-control" id="brand" required>
+            <span class="text-danger" id="brand-error"></span>
+          </div>
+  
+          <div class="mb-3">
+            <label for="imageUrl" class="form-label">imageUrl</label>
+            <input type="url" class="form-control" id="imageUrl" required>
+            <span class="text-danger" id="image-error"></span>
+          </div>
+          
+          <div class="mb-3">
+            <label for="price" class="form-label">Prezzo</label>
+            <input type="number" class="form-control" id="price" required>
+            <span class="text-danger" id="price-error"></span>
+          </div>
+  
+          <button type="submit" class="btn btn-primary">Inserisci prodotto</button>
+  
+        </form>
+  
+        </div>
+
+    </main>
+    
+
+
+
+
+    <script src="bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="product-form.js"></script>
+</body>
+</html>

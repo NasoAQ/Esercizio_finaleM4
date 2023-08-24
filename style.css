@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    background-color: #e3f2fd;
+}
+
+/* main {
+    display: flex;
+} */
+
+
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100px;
+}
+
+.my-btn {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 10px;
+    border-radius: 50%;
+}
