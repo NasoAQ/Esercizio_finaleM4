@@ -20,7 +20,7 @@ headers: {
         img.src = product.imageUrl;
 
         const cardBody = document.createElement('div');
-        cardBody.classList.add('card-body', 'd-flex', 'align-items-center', 'flex-column');
+        cardBody.classList.add('card-body', 'd-flex', 'align-items-center','justify-content-between', 'flex-column');
 
         const title = document.createElement('h5');
         title.classList.add('card-title');
@@ -29,6 +29,10 @@ headers: {
         const brand = document.createElement('p');
         brand.classList.add('card-text');
         brand.textContent = `Brand: ${product.brand}`;
+        
+        const description = document.createElement('p');
+        description.classList.add('card-text');
+        description.textContent = product.description;
 
         const price = document.createElement('p');
         price.classList.add('card-text');
@@ -48,6 +52,7 @@ headers: {
 
         cardBody.appendChild(title);
         cardBody.appendChild(brand);
+        cardBody.appendChild(description);
         cardBody.appendChild(price);
         cardBody.appendChild(detailsButton);
 

@@ -15,15 +15,19 @@
               <a class="navbar-brand" href="index.html">
                 <img src="anason-22-8-2023.png" alt="logo" width="80" height="30">
               </a>
+              <a href="#Lista">Lista</a>
+              <a href="#Form">Form</a>
+              <a href="index.html">Back to home</a>
             </div>
+            
           </nav>
     </header>
 
     <main class="container">
+        
+        <h2 id="Lista" >Prodotti inseriti</h2>
 
         <div class="table-container table-responsive">
-
-        <h2>Prodotti inseriti</h2>
 
         <table class="table table-dark table-sm">
   
@@ -64,7 +68,7 @@
   
         </div>
 
-        <div class="container">
+        <div id="Form" class="container">
 
         <h2>Compila il form per aggiungere un prodotto</h2>
 
@@ -72,31 +76,31 @@
   
           <div class="mb-3">
             <label for="name" class="form-label">Nome prodotto</label>
-            <input type="text" class="form-control" id="name" required>
+            <input type="text" placeholder="Example: Jordan 1" class="form-control" id="name" required>
             <span class="text-danger" id="name-error"></span>
           </div>
   
           <div class="mb-3">
             <label for="description" class="form-label">Descrizione</label>
-            <input type="text" class="form-control" id="description" required>
+            <input type="text" placeholder="Example: Color blue" class="form-control" id="description" required>
             <span class="text-danger" id="description-error"></span>
           </div>
   
           <div class="mb-3">
             <label for="brand" class="form-label">Brand</label>
-            <input type="text" class="form-control" id="brand" required>
+            <input type="text" placeholder="Example: Nike" class="form-control" id="brand" required>
             <span class="text-danger" id="brand-error"></span>
           </div>
   
           <div class="mb-3">
             <label for="imageUrl" class="form-label">imageUrl</label>
-            <input type="url" class="form-control" id="imageUrl" required>
+            <input type="url" placeholder="https://www.example.com" class="form-control" id="imageUrl" required>
             <span class="text-danger" id="image-error"></span>
           </div>
           
           <div class="mb-3">
             <label for="price" class="form-label">Prezzo</label>
-            <input type="number" class="form-control" id="price" required>
+            <input type="number" placeholder="Example: 100" class="form-control" id="price" required>
             <span class="text-danger" id="price-error"></span>
           </div>
   

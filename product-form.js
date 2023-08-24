@@ -131,7 +131,7 @@ function displayProducts(products) {
           <td>${product.description}</td>
           <td>${product.brand}</td>
           <td>${product.imageUrl}</td>
-          <td>${product.price}</td>
+          <td>${product.price} €</td>
           <td>
             <!-- Inserire pulsanti per modifica e cancellazione -->
             <button type="reset" class="delete-button my-btn btn btn-outline-primary" data-product-id="${product._id}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">

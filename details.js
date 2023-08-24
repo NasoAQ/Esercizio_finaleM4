@@ -16,22 +16,44 @@ function fetchProductDetails(productId){
         .then(response => response.json())
         .then(product => {
             const productDetailsContainer = document.getElementById('product-details-container');
+            
+            const card = document.createElement('div');
+            card.classList.add('card','text-bg-dark', 'mb-3', 'h-100');
+
             const img = document.createElement('img');
-            img.classList.add('product-img');
+            img.classList.add('card-img-top');
             img.src = product.imageUrl;
-            productDetailsContainer.appendChild(img);
+            //productDetailsContainer.appendChild(img);
+
+            const cardBody = document.createElement('div');
+            cardBody.classList.add('card-body', 'd-flex', 'align-items-center','justify-content-between', 'flex-column');
 
             const title = document.createElement('h2');
             title.textContent = product.name;
-            productDetailsContainer.appendChild(title);
+            //productDetailsContainer.appendChild(title);
             
             const description = document.createElement('p');
             description.textContent = product.description;
-            productDetailsContainer.appendChild(description);
+            //productDetailsContainer.appendChild(description);
 
             const price = document.createElement('p');
             price.textContent = `Prezzo: ${product.price}€`;
-            productDetailsContainer.appendChild(price);
+            //productDetailsContainer.appendChild(price);
+
+            const addToCartButton = document.createElement('button');
+            addToCartButton.classList.add('btn', 'btn-warning', 'my-1');
+            addToCartButton.textContent = 'BUY NOW';
+
+            cardBody.appendChild(title)
+            cardBody.appendChild(description)
+            cardBody.appendChild(price)
+            cardBody.appendChild(addToCartButton)
+
+            card.appendChild(img)
+            card.appendChild(cardBody)
+
+            productDetailsContainer.appendChild(card)
+            
 
         })
         .catch(error => {
