@@ -21,8 +21,6 @@ td {
 }
 
 .my-btn {
-    display: flex;
-    flex-wrap: nowrap;
-    padding: 10px;
-    border-radius: 50%;
+    padding: 5px;
+    border-radius: 0;
 }
