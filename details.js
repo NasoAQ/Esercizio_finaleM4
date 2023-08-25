@@ -18,7 +18,7 @@ function fetchProductDetails(productId){
             const productDetailsContainer = document.getElementById('product-details-container');
             
             const card = document.createElement('div');
-            card.classList.add('card','text-bg-dark', 'mb-3', 'h-100');
+            card.classList.add('card','text-bg-light', 'p-0', 'mb-3', 'h-100', 'border-light', 'dtlCard');
 
             const img = document.createElement('img');
             img.classList.add('card-img-top');
@@ -41,7 +41,7 @@ function fetchProductDetails(productId){
             //productDetailsContainer.appendChild(price);
 
             const addToCartButton = document.createElement('button');
-            addToCartButton.classList.add('btn', 'btn-warning', 'my-1');
+            addToCartButton.classList.add('btn', 'btn-dark', 'my-1');
             addToCartButton.textContent = 'BUY NOW';
 
             cardBody.appendChild(title)

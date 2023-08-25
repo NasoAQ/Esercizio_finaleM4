@@ -13,14 +13,14 @@ headers: {
     function createProductCard(product) {
 
         const card = document.createElement('div');
-        card.classList.add('card','text-bg-dark', 'mb-3', 'h-100');
+        card.classList.add('card','text-bg-light', 'mb-3', 'h-100', 'border-light');
 
         const img = document.createElement('img');
         img.classList.add('card-img-top');
         img.src = product.imageUrl;
 
         const cardBody = document.createElement('div');
-        cardBody.classList.add('card-body', 'd-flex', 'align-items-center','justify-content-between', 'flex-column');
+        cardBody.classList.add('card-body', 'd-flex','justify-content-between', 'flex-column');
 
         const title = document.createElement('h5');
         title.classList.add('card-title');
@@ -30,17 +30,18 @@ headers: {
         brand.classList.add('card-text');
         brand.textContent = `Brand: ${product.brand}`;
         
-        const description = document.createElement('p');
-        description.classList.add('card-text');
-        description.textContent = product.description;
+        // const description = document.createElement('p');
+        // description.classList.add('card-text');
+        // description.textContent = product.description;
 
         const price = document.createElement('p');
-        price.classList.add('card-text');
+        price.classList.add('card-text', 'fw-bold', 'text-danger');        
         price.textContent = `Prezzo: ${product.price}€`;
+        
         
         // Creo il pulsante "Dettagli"
         const detailsButton = document.createElement('button');
-        detailsButton.classList.add('btn', 'btn-outline-warning', 'my-1');
+        detailsButton.classList.add('btn', 'btn-outline-dark', 'btn-sm', 'my-1');
         detailsButton.textContent = 'Dettagli';
         //Definisco l'url della pagina "dettagli"
         //const detailsUrl = `/dettagli.html?id=${book.asin}`;
@@ -52,7 +53,7 @@ headers: {
 
         cardBody.appendChild(title);
         cardBody.appendChild(brand);
-        cardBody.appendChild(description);
+        //cardBody.appendChild(description);
         cardBody.appendChild(price);
         cardBody.appendChild(detailsButton);
 

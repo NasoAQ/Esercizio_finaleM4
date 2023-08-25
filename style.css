@@ -5,7 +5,8 @@
 }
 
 .navbar {
-    background-color: #e3f2fd;
+    background-color: #fafafa;
+    border-bottom: 1px solid #00000036;
 }
 
 /* main {
@@ -23,4 +24,15 @@ td {
 .my-btn {
     padding: 5px;
     border-radius: 0;
+}
+
+#product-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.dtlCard {
+    width: 18rem;
 }
