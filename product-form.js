@@ -170,6 +170,7 @@ function deleteProduct(productId) {
         }
     };
 
+    
     fetch(deleteUrl, deleteMethod)
     .then(res => res.json())
     .then(deleteData => {
