@@ -52,7 +52,7 @@ headers: {
         });
 
         cardBody.appendChild(title);
-        cardBody.appendChild(brand);
+        //cardBody.appendChild(brand);
         //cardBody.appendChild(description);
         cardBody.appendChild(price);
         cardBody.appendChild(detailsButton);

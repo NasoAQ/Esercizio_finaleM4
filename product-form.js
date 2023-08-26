@@ -275,9 +275,10 @@ editButton.addEventListener('click', async (event) => {
   });
 });
 
+let deleteButton;
 //Funzione per eliminare un prodotto con il metodo DELETE
 function deleteProduct(productId) {
-    const deleteButton = document.querySelector(`button[data-product-id="${productId}"]`);
+    deleteButton = document.querySelector(`button[data-product-id="${productId}"]`);
     const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
     const confirmDeleteButton = document.getElementById('confirmDelete');
 
@@ -304,7 +305,7 @@ function deleteProduct(productId) {
             console.log(deleteData);
             fetchProducts();
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log('Operazione annullata', err));
     });
 
     // Aggiungi l'event listener per il pulsante di annullamento nella modale

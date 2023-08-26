@@ -26,25 +26,31 @@ function fetchProductDetails(productId){
             //productDetailsContainer.appendChild(img);
 
             const cardBody = document.createElement('div');
-            cardBody.classList.add('card-body', 'd-flex', 'align-items-center','justify-content-between', 'flex-column');
+            cardBody.classList.add('card-body', 'd-flex','justify-content-between', 'flex-column');
 
             const title = document.createElement('h2');
             title.textContent = product.name;
             //productDetailsContainer.appendChild(title);
+            
+            const brand = document.createElement('h5');
+            brand.textContent = product.brand;
+            //productDetailsContainer.appendChild(brand);
             
             const description = document.createElement('p');
             description.textContent = product.description;
             //productDetailsContainer.appendChild(description);
 
             const price = document.createElement('p');
+            price.classList.add( 'fw-bold', 'text-danger')
             price.textContent = `Prezzo: ${product.price}€`;
             //productDetailsContainer.appendChild(price);
 
             const addToCartButton = document.createElement('button');
-            addToCartButton.classList.add('btn', 'btn-dark', 'my-1');
+            addToCartButton.classList.add('btn', 'btn-outline-danger', 'my-1');
             addToCartButton.textContent = 'BUY NOW';
 
             cardBody.appendChild(title)
+            cardBody.appendChild(brand)
             cardBody.appendChild(description)
             cardBody.appendChild(price)
             cardBody.appendChild(addToCartButton)
