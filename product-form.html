@@ -20,12 +20,49 @@
               Sei sicuro di voler eliminare questo prodotto?
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelDelete">Annulla</button>
+              <button type="button" class="btn btn-dark" data-bs-dismiss="modal" id="cancelDelete">Annulla</button>
               <button type="button" class="btn btn-danger" id="confirmDelete">Conferma Cancellazione</button>
             </div>
           </div>
         </div>
+    </div>
+
+    <div id="editModal" class="modal fade" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="editModalLabel">Conferma Modifica</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  Sei sicuro di voler confermare la modifica di questo prodotto?
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-dark" data-bs-dismiss="modal" id="cancelEdit">Annulla</button>
+                  <button type="button" class="btn btn-success" id="confirmEdit">Conferma Modifica</button>
+              </div>
+          </div>
       </div>
+    </div>
+
+    <div id="addModal" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="addModalLabel">Conferma Aggiunta Prodotto</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  Sei sicuro di voler aggiungere questo prodotto?
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelAdd">Annulla</button>
+                  <button type="button" class="btn btn-dark" id="confirmAdd">Conferma Aggiunta</button>
+              </div>
+          </div>
+      </div>
+    </div>
+  
       
 
     <header>
@@ -36,7 +73,7 @@
               </a>
               <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" href="#Lista">Lista</a>
               <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" href="#Form">Form</a>
-              <a href="index.html"><button class="btn btn-sm btn-dark">Back to home</button></a>
+              <a href="index.html"><button class="btn btn-sm btn-dark">Catalogo</button></a>
             </div>
             
           </nav>
@@ -123,7 +160,7 @@
             <span class="text-danger" id="price-error"></span>
           </div>
   
-          <button type="submit" class="btn btn-dark">Aggiungi</button>
+          <button id="add-button" type="submit" class="btn btn-dark">Aggiungi</button>
           <button id="save-edit-button" type="submit" class="btn btn-success">Modifica</button>
   
         </form>

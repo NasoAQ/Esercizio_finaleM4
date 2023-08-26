@@ -1,6 +1,7 @@
 const API_URL = 'https://striveschool-api.herokuapp.com/api/product/'
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU0N2M5ZGRmZmI4YjAwMTQ0MTNiOWYiLCJpYXQiOjE2OTI2OTU3MDksImV4cCI6MTY5MzkwNTMwOX0.axZpS7dRbLk519HLKSPjQU8qtZSRkC9yRx42oAu_n1c"
 const form = document.getElementById('product-form');
+const editForm = document.getElementById('product-form');
 
 const nameInput = document.getElementById('name');
 const descriptionInput = document.getElementById('description');
@@ -8,42 +9,65 @@ const brandInput = document.getElementById('brand');
 const imageUrlInput = document.getElementById('imageUrl');
 const priceInput = document.getElementById('price');
 
-form.addEventListener('submit', async (event) => {
+const addButton = document.getElementById('add-button');
+const addModal = new bootstrap.Modal(document.getElementById('addModal'));
+const confirmAddButton = document.getElementById('confirmAdd');
 
-    event.preventDefault();
-  
+addButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  addModal.show();
+  //console.log('modale aperta');
+});
+
+// Aggiungi l'event listener per il pulsante di conferma nella modale di aggiunta
+confirmAddButton.addEventListener('click', async () => {
+    addModal.hide(); // Chiudi la modale
+
+    // Continua con l'aggiunta del prodotto
     const isFormValid = handelFormValidation();
-    if (!isFormValid) return false;
-  
-    const product = {
-      name: nameInput.value,
-      description: descriptionInput.value,
-      brand: brandInput.value,
-      imageUrl: imageUrlInput.value,
-      price: priceInput.value,
+    if (!isFormValid) {
+        alert('Si è verificato un errore durante l\'aggiunta del prodotto');
+        return;
     }
+
+    const newProduct = {
+        name: nameInput.value,
+        description: descriptionInput.value,
+        brand: brandInput.value,
+        imageUrl: imageUrlInput.value,
+        price: priceInput.value,
+    };
+
     try {
-    
         const response = await fetch(`${API_URL}`, {
-          method: 'POST',
-          body: JSON.stringify(product),
-          headers: {
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU0N2M5ZGRmZmI4YjAwMTQ0MTNiOWYiLCJpYXQiOjE2OTI2OTU3MDksImV4cCI6MTY5MzkwNTMwOX0.axZpS7dRbLk519HLKSPjQU8qtZSRkC9yRx42oAu_n1c",
-            'Content-type': 'application/json; charset=UTF-8'
+            method: 'POST',
+            body: JSON.stringify(newProduct),
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                'Content-type': 'application/json; charset=UTF-8'
             }
-        })
-    
+        });
+
         if (response.ok) {
-          //window.location.href = 'product-form.html'
+            fetchProducts(); // Aggiorna la tabella dei prodotti
+            clearForm(); // Svuota il form
         } else {
-          alert('Si è verificato un errore durante la creazione dell\'utente.')
+            alert('Si è verificato un errore durante l\'aggiunta del prodotto.');
         }
-      } catch (error) {
-        console.log('Errore durante il salvataggio: ', error);
-        alert('Si è verificato un errore durante il salvataggio.')
-      };
-      fetchProducts()
-})
+    } catch (error) {
+        console.log('Errore durante l\'aggiunta: ', error);
+        alert('Si è verificato un errore durante l\'aggiunta.');
+    }
+});
+
+//Funzione per svuotare il form
+function clearForm() {
+    nameInput.value = '';
+    descriptionInput.value = '';
+    brandInput.value = '';
+    imageUrlInput.value = '';
+    priceInput.value = '';
+}
 
 function handelFormValidation() {
   
@@ -66,6 +90,7 @@ function handelFormValidation() {
       
 }
 
+//Funzione per i campi obbligatori del form
 function validateForm() {
     const errors = {}
   
@@ -161,18 +186,23 @@ function displayProducts(products) {
     editBtn.forEach(button => {
         button.addEventListener('click', event => {
             const productId = event.currentTarget.getAttribute('data-product-id');
+            console.log('Hai clickato edit per ID:', productId);
             editProduct(productId);
+
+            editButton.setAttribute('data-product-id', productId);
+
             document.getElementById('Form').scrollIntoView({behavior: 'smooth'});
         });
         
     });
 }
 
+//Funzione per recuperare i dati del prodotto da modificare
 function editProduct(productId) {
     fetch(`${API_URL}${productId}`, {
         headers: {
             "Authorization": `Bearer ${token}`,
-            'Content-type': 'application/jason; charset=UTF-8'
+            'Content-type': 'application/json; charset=UTF-8'
         }
     })
     .then(response => response.json())
@@ -184,6 +214,7 @@ function editProduct(productId) {
         imageUrlInput.value = product.imageUrl;
         priceInput.value = product.price;
 
+        const editForm = document.getElementById('product-form');
         editForm.setAttribute('data-product-id', productId);
     })
     .catch(error => {
@@ -191,69 +222,60 @@ function editProduct(productId) {
     })
 }
 
-function updateProduct(productId, updatedProduct) {
-  fetch(`${API_URL}${productId}`, {
-      method: 'PUT',
-      headers: {
-          "Authorization": `Bearer ${token}`,
-          'Content-type': 'application/json; charset=UTF-8'
-      },
-      body: JSON.stringify(updatedProduct)
-  })
-  .then(response => response.json())
-  .then(updatedData => {
-      console.log(updatedData);
-      fetchProducts(); // Aggiorna la tabella dei prodotti
-      clearForm(); // Svuota il form
-  })
-  .catch(error => {
-      console.log('Errore nell\'aggiornamento del prodotto', error);
-  });
-}
-
+//Gestisco gli elementi per la modifica del prodotto
 const editButton = document.getElementById('save-edit-button');
+const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+const confirmEditButton = document.getElementById('confirmEdit');
 
-editButton.addEventListener('submit', async (event) => {
+editButton.addEventListener('click', async (event) => {
     event.preventDefault();
 
     const productId = editButton.getAttribute('data-product-id'); // Recupera l'ID del prodotto dal form
 
     const isFormValid = handelFormValidation();
-    if (!isFormValid) return false;
-
-    const updatedProduct = {
-        name: nameInput.value,
-        description: descriptionInput.value,
-        brand: brandInput.value,
-        imageUrl: imageUrlInput.value,
-        price: priceInput.value,
-    };
-
-    try {
-        const response = await fetch(`${API_URL}${productId}`, {
-            method: 'PUT',
-            body: JSON.stringify(updatedProduct),
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                'Content-type': 'application/json; charset=UTF-8'
-            }
-        });
-
-        if (response.ok) {
-            fetchProducts(); // Aggiorna la tabella dei prodotti
-            editForm.reset(); // Svuota il form
-        } else {
-            alert('Si è verificato un errore durante la modifica del prodotto.');
-        }
-    } catch (error) {
-        console.log('Errore durante la modifica: ', error);
-        alert('Si è verificato un errore durante la modifica.');
+    if (!isFormValid) {
+      alert('Si è verificato un errore durante la modifica del prodotto')
+      return;
     }
+
+    editModal.show();
+
+    // Aggiungi l'event listener per il pulsante di conferma nella modale
+    confirmEditButton.addEventListener('click', async () => {
+      editModal.hide(); // Chiudi la modale
+
+      const updatedProduct = {
+          name: nameInput.value,
+          description: descriptionInput.value,
+          brand: brandInput.value,
+          imageUrl: imageUrlInput.value,
+          price: priceInput.value,
+      };
+
+      try {
+          const response = await fetch(`${API_URL}${productId}`, {
+              method: 'PUT',
+              body: JSON.stringify(updatedProduct),
+              headers: {
+                  "Authorization": `Bearer ${token}`,
+                  'Content-type': 'application/json; charset=UTF-8'
+              }
+          });
+
+          if (response.ok) {
+              fetchProducts(); // Aggiorna la tabella dei prodotti
+              form.reset(); // Svuota il form
+          } else {
+              alert('Si è verificato un errore durante la modifica del prodotto.');
+          }
+      } catch (error) {
+          console.log('Errore durante la modifica: ', error);
+          alert('Si è verificato un errore durante la modifica.');
+      }
+  });
 });
 
-
-
-
+//Funzione per eliminare un prodotto con il metodo DELETE
 function deleteProduct(productId) {
     const deleteButton = document.querySelector(`button[data-product-id="${productId}"]`);
     const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
