@@ -116,7 +116,6 @@ async function fetchProducts() {
     }
 }
 
-
 function displayProducts(products) {
   
     const tableBody = document.getElementById('products-table-body');
@@ -161,7 +160,7 @@ function displayProducts(products) {
     const editBtn = document.querySelectorAll('.edit-button');
     editBtn.forEach(button => {
         button.addEventListener('click', event => {
-            const productId = event.target.getAttribute('data-product-id');
+            const productId = event.currentTarget.getAttribute('data-product-id');
             editProduct(productId);
             document.getElementById('Form').scrollIntoView({behavior: 'smooth'});
         });
@@ -184,11 +183,76 @@ function editProduct(productId) {
         brandInput.value = product.brand;
         imageUrlInput.value = product.imageUrl;
         priceInput.value = product.price;
+
+        editForm.setAttribute('data-product-id', productId);
     })
     .catch(error => {
         console.log('Errore nel recupero dei dettagli',error);
     })
 }
+
+function updateProduct(productId, updatedProduct) {
+  fetch(`${API_URL}${productId}`, {
+      method: 'PUT',
+      headers: {
+          "Authorization": `Bearer ${token}`,
+          'Content-type': 'application/json; charset=UTF-8'
+      },
+      body: JSON.stringify(updatedProduct)
+  })
+  .then(response => response.json())
+  .then(updatedData => {
+      console.log(updatedData);
+      fetchProducts(); // Aggiorna la tabella dei prodotti
+      clearForm(); // Svuota il form
+  })
+  .catch(error => {
+      console.log('Errore nell\'aggiornamento del prodotto', error);
+  });
+}
+
+const editButton = document.getElementById('save-edit-button');
+
+editButton.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const productId = editButton.getAttribute('data-product-id'); // Recupera l'ID del prodotto dal form
+
+    const isFormValid = handelFormValidation();
+    if (!isFormValid) return false;
+
+    const updatedProduct = {
+        name: nameInput.value,
+        description: descriptionInput.value,
+        brand: brandInput.value,
+        imageUrl: imageUrlInput.value,
+        price: priceInput.value,
+    };
+
+    try {
+        const response = await fetch(`${API_URL}${productId}`, {
+            method: 'PUT',
+            body: JSON.stringify(updatedProduct),
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        });
+
+        if (response.ok) {
+            fetchProducts(); // Aggiorna la tabella dei prodotti
+            editForm.reset(); // Svuota il form
+        } else {
+            alert('Si è verificato un errore durante la modifica del prodotto.');
+        }
+    } catch (error) {
+        console.log('Errore durante la modifica: ', error);
+        alert('Si è verificato un errore durante la modifica.');
+    }
+});
+
+
+
 
 function deleteProduct(productId) {
     const deleteButton = document.querySelector(`button[data-product-id="${productId}"]`);
