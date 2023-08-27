@@ -111,10 +111,10 @@ function addUser() {
         );
 
         // Aggiorna la visualizzazione con i prodotti filtrati
-        rebderProducts(filteredProducts);
+        renderProducts(filteredProducts);
     } else {
         // Se il testo di ricerca è troppo breve, mostra tutti i prodotti
-        rebderProducts(productsList);
+        renderProducts(productsList);
     }
 });
 
