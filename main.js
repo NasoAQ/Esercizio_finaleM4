@@ -1,5 +1,10 @@
 const API_URL = 'https://striveschool-api.herokuapp.com/api/product/'
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU0N2M5ZGRmZmI4YjAwMTQ0MTNiOWYiLCJpYXQiOjE2OTI2OTU3MDksImV4cCI6MTY5MzkwNTMwOX0.axZpS7dRbLk519HLKSPjQU8qtZSRkC9yRx42oAu_n1c"
+const spinnerContainer = document.getElementById('spinner-container');
+const productsContainer = document.getElementById('products-container');
+
+spinnerContainer.classList.remove('d-none');
+
 
 fetch(`${API_URL}` , {
 headers: {
@@ -8,7 +13,9 @@ headers: {
 })
     .then(response => response.json())
     .then(productList => {
-    const productsContainer = document.getElementById('products-container');
+        setTimeout(() => {
+            spinnerContainer.classList.add('d-none');
+        }, 500);
 
     function createProductCard(product) {
 

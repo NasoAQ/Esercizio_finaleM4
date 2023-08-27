@@ -9,9 +9,7 @@
 </head>
 <body>
 
-  
-
-    <div id="deleteModal" class="modal fade" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div id="deleteModal" class="modal fade" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -80,7 +78,11 @@
     </header>
 
     <main id="Lista" class="container">
-        
+
+        <div id="success-alert" class="alert alert-success d-none" role="alert">
+          Prodotto inserito con successo!
+        </div>
+
         <h2>Prodotti inseriti</h2>
         <form class="d-flex" role="search">
           <input class="form-control me-2 w-50" type="search" placeholder="Cerca per brand" aria-label="Search">
@@ -166,8 +168,10 @@
       </div>
     </div>
 
-    <footer>
-
+    <footer class="footer mt-auto py-3 bg-light">
+      <div class="container">
+        <span class="text-muted">Anason shoes company</span>
+      </div>
     </footer>
     
 

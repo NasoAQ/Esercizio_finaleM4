@@ -55,7 +55,15 @@ confirmAddButton.addEventListener('click', async () => {
 
         if (response.ok) {
             fetchProducts(); // Aggiorna la tabella dei prodotti
-            clearForm(); // Svuota il form
+            clearForm();
+            const successAlert = document.getElementById('success-alert');
+            successAlert.classList.remove('d-none');
+            setTimeout(() => {
+                successAlert.classList.add('d-none');
+            }, 5000);
+
+            window.scrollTo(0, 0);
+            
         } else {
             alert('Si è verificato un errore durante l\'aggiunta del prodotto.');
         }
@@ -288,20 +296,20 @@ editButton.addEventListener('click', async (event) => {
 
 //Funzione per eliminare un prodotto con il metodo DELETE
 function deleteProduct(productId) {
-    let deleteButton;
-    deleteButton = document.querySelector(`button[data-product-id="${productId}"]`);
     const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
     const confirmDeleteButton = document.getElementById('confirmDelete');
-
-    // Apri la modale di conferma
-    deleteModal.show();
+    const cancelDeleteButton = document.getElementById('cancelDelete');
+    
+    // Memorizza l'ID del prodotto nella variabile productIdToDelete
+    let productIdToDelete = productId;
 
     // Aggiungi l'event listener per il pulsante di conferma nella modale
-    confirmDeleteButton.addEventListener('click', () => {
-        deleteModal.hide(); // Chiudi la modale
+    confirmDeleteButton.addEventListener('click', async (event) => {
+        event.preventDefault();
 
-        // Continua con la cancellazione
-        const deleteUrl = `${API_URL}${productId}`;
+        // Utilizza l'ID del prodotto memorizzato in productIdToDelete
+        console.log('ID prodotto:', productIdToDelete);
+        const deleteUrl = `${API_URL}${productIdToDelete}`;
         const deleteMethod = {
             method: 'DELETE',
             headers: {
@@ -310,23 +318,28 @@ function deleteProduct(productId) {
             }
         };
 
-        fetch(deleteUrl, deleteMethod)
-        .then(res => res.json())
-        .then(deleteData => {
+        try {
+            const response = await fetch(deleteUrl, deleteMethod);
+            const deleteData = await response.json();
             console.log(deleteData);
             fetchProducts();
-        })
-        .catch(err => console.log('Operazione annullata', err));
+        } catch (err) {
+            console.log('Operazione annullata', err);
+        }
+
+        deleteModal.hide(); // Chiudi la modale
     });
 
     // Aggiungi l'event listener per il pulsante di annullamento nella modale
-    const cancelDeleteButton = document.getElementById('cancelDelete');
     cancelDeleteButton.addEventListener('click', () => {
-        deleteButton.disabled = false; // Riattiva il pulsante di eliminazione
+        deleteModal.hide(); // Chiudi la modale
     });
-    fetchProducts()
-}
 
+    // Apri la modale di conferma dopo un breve timeout
+    setTimeout(() => {
+        deleteModal.show();
+    }, 100);
+}
 
 fetchProducts() 
 

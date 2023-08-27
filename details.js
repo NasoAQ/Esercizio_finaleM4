@@ -2,7 +2,9 @@ const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('_id');
 const API_URL = 'https://striveschool-api.herokuapp.com/api/product/'
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU0N2M5ZGRmZmI4YjAwMTQ0MTNiOWYiLCJpYXQiOjE2OTI2OTU3MDksImV4cCI6MTY5MzkwNTMwOX0.axZpS7dRbLk519HLKSPjQU8qtZSRkC9yRx42oAu_n1c"
-    
+const spinnerContainer = document.getElementById('spinner-container');
+
+spinnerContainer.classList.remove('d-none');
 
 // Chiamata alla funzione per recuperare e visualizzare i dettagli del prodotto
 fetchProductDetails(productId);
@@ -15,6 +17,9 @@ function fetchProductDetails(productId){
     })
         .then(response => response.json())
         .then(product => {
+            setTimeout(() => {
+                spinnerContainer.classList.add('d-none');
+            }, 500)
             const productDetailsContainer = document.getElementById('product-details-container');
             
             const card = document.createElement('div');

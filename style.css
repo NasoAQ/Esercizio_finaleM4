@@ -9,8 +9,14 @@
     border-bottom: 1px solid #00000036;
 }
 
+footer {
+    background-color: #fafafa;
+    border-top: 1px solid #00000036;
+}
+
 main {
     margin-top: 80px;
+    margin-bottom: 80px;
 }
 
 #Lista {
@@ -18,7 +24,7 @@ main {
 }
 
 #spinner-container {
-    margin-top: 200px;
+    margin-top: 100px;
 }
 
 td {
