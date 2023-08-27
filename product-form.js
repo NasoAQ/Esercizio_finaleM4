@@ -60,7 +60,7 @@ confirmAddButton.addEventListener('click', async () => {
             successAlert.classList.remove('d-none');
             setTimeout(() => {
                 successAlert.classList.add('d-none');
-            }, 5000);
+            }, 3000);
 
             window.scrollTo(0, 0);
             
@@ -196,7 +196,8 @@ function displayProducts(products) {
     const deleteBtn = document.querySelectorAll('.delete-button');
     deleteBtn.forEach(button => {
         button.addEventListener('click', event => {
-            const productId = event.target.getAttribute('data-product-id');
+            const productId = event.currentTarget.getAttribute('data-product-id');
+            console.log('Hai clickato delete per ID:', productId);
             deleteProduct(productId);
         });
     });
@@ -246,6 +247,7 @@ const editButton = document.getElementById('save-edit-button');
 const editModal = new bootstrap.Modal(document.getElementById('editModal'));
 const confirmEditButton = document.getElementById('confirmEdit');
 
+//Aggiungo un listener al pulsante di modifica
 editButton.addEventListener('click', async (event) => {
     event.preventDefault();
 
@@ -284,6 +286,13 @@ editButton.addEventListener('click', async (event) => {
           if (response.ok) {
               fetchProducts(); // Aggiorna la tabella dei prodotti
               form.reset(); // Svuota il form
+              const editAlert = document.getElementById('edit-alert');
+                editAlert.classList.remove('d-none');
+                setTimeout(() => {
+                editAlert.classList.add('d-none');
+            }, 3000);
+
+            window.scrollTo(0, 0);
           } else {
               alert('Si è verificato un errore durante la modifica del prodotto.');
           }
@@ -323,6 +332,13 @@ function deleteProduct(productId) {
             const deleteData = await response.json();
             console.log(deleteData);
             fetchProducts();
+            const deleteAlert = document.getElementById('delete-alert');
+            deleteAlert.classList.remove('d-none');
+            setTimeout(() => {
+                deleteAlert.classList.add('d-none');
+            }, 3000);
+
+            window.scrollTo(0, 0);
         } catch (err) {
             console.log('Operazione annullata', err);
         }

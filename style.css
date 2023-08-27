@@ -23,6 +23,10 @@ main {
     display: none;
 }
 
+#Form {
+    margin-top: 80px;
+}
+
 #spinner-container {
     margin-top: 100px;
 }
