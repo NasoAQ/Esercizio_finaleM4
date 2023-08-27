@@ -15,6 +15,11 @@ const confirmAddButton = document.getElementById('confirmAdd');
 
 addButton.addEventListener('click', (event) => {
   event.preventDefault();
+  const isFormValid = handelFormValidation();
+    if (!isFormValid) {
+        alert('Si è verificato un errore durante l\'aggiunta del prodotto');
+        return;
+    }
   addModal.show();
   //console.log('modale aperta');
 });
@@ -123,6 +128,9 @@ function validateForm() {
 }
 
 async function fetchProducts() {
+    const spinnerContainer = document.getElementById('spinner-container');
+    const mainContent = document.getElementById('Lista')
+    spinnerContainer.classList.remove('d-none')
 
     try {
       const response = await fetch(`${API_URL}`, {
@@ -132,10 +140,13 @@ async function fetchProducts() {
             }
       });
       const data = await response.json()
-  
-      // AGGIUNGERE PRODOTTI ALLA TABELLA
-      displayProducts(data);
-  
+
+      setTimeout(() => {
+          spinnerContainer.classList.add('d-none')
+          mainContent.style.display = 'block'
+          // AGGIUNGERE PRODOTTI ALLA TABELLA
+          displayProducts(data);
+      }, 500);
     } catch (error) {
       console.log('Errore nel recupero dei prodotti: ', error);
     }

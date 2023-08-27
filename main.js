@@ -22,7 +22,7 @@ headers: {
         const cardBody = document.createElement('div');
         cardBody.classList.add('card-body', 'd-flex','justify-content-between', 'flex-column');
 
-        const title = document.createElement('h5');
+        const title = document.createElement('h6', 'm-0');
         title.classList.add('card-title');
         title.textContent = product.name;
 
@@ -35,13 +35,13 @@ headers: {
         // description.textContent = product.description;
 
         const price = document.createElement('p');
-        price.classList.add('card-text', 'fw-bold', 'text-danger');        
-        price.textContent = `Prezzo: ${product.price}€`;
+        price.classList.add('card-text', 'fw-bold', 'text-warning-emphasis', 'm-0', 'h5');        
+        price.textContent = `${product.price}€`;
         
         
         // Creo il pulsante "Dettagli"
         const detailsButton = document.createElement('button');
-        detailsButton.classList.add('btn', 'btn-outline-dark', 'btn-sm', 'my-1');
+        detailsButton.classList.add('btn', 'btn-outline-warning', 'text-dark', 'btn-sm', 'm-0');
         detailsButton.textContent = 'Dettagli';
         //Definisco l'url della pagina "dettagli"
         //const detailsUrl = `/dettagli.html?id=${book.asin}`;

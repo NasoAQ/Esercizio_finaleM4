@@ -9,6 +9,8 @@
 </head>
 <body>
 
+  
+
     <div id="deleteModal" class="modal fade" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -57,16 +59,14 @@
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelAdd">Annulla</button>
-                  <button type="button" class="btn btn-dark" id="confirmAdd">Conferma Aggiunta</button>
+                  <button type="button" class="btn btn-warning" id="confirmAdd">Conferma Aggiunta</button>
               </div>
           </div>
       </div>
     </div>
-  
-      
-
+        
     <header>
-        <nav class="navbar">
+        <nav class="navbar fixed-top">
             <div class="container">
               <a class="navbar-brand" href="index.html">
                 <img src="anason-22-8-2023.png" alt="logo" width="150" height="40">
@@ -79,9 +79,15 @@
           </nav>
     </header>
 
-    <main class="container">
+    <main id="Lista" class="container">
         
-        <h2 id="Lista" >Prodotti inseriti</h2>
+        <h2>Prodotti inseriti</h2>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2 w-50" type="search" placeholder="Cerca per brand" aria-label="Search">
+          <button class="my-btn btn btn-outline-dark" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg></button>
+        </form>
 
         <div class="table-container table-responsive">
 
@@ -100,33 +106,18 @@
           </thead>
   
           <tbody id="products-table-body">
-
-            <!-- <tr id="spinner-row" class="table-row" style="display: none;">
-                <td colspan="7" style="text-align: center;">
-                  <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                  </div>
-                </td>
-            </tr> -->
   
           </tbody>
   
   
         </table>
-  
-        <!-- 
-          <div class="spinner-container">
-            <div id="spinner-row" class="spinner-border" role="status">
-              <span class="visually-hidden">Caricamento...</span>
-            </div>
-          </div> 
-        -->
-  
+
         </div>
 
         <div id="Form" class="container">
 
-        <h2>Compila il form per aggiungere un prodotto</h2>
+        <h2>Compila il form per aggiungere o modificare un prodotto</h2>
+        
 
         <form id="product-form" class="" novalidate>
   
@@ -160,7 +151,7 @@
             <span class="text-danger" id="price-error"></span>
           </div>
   
-          <button id="add-button" type="submit" class="btn btn-dark">Aggiungi</button>
+          <button id="add-button" type="submit" class="btn btn-warning">Aggiungi</button>
           <button id="save-edit-button" type="submit" class="btn btn-success">Modifica</button>
   
         </form>
@@ -168,6 +159,16 @@
         </div>
 
     </main>
+
+    <div id="spinner-container" class="d-flex justify-content-center d-none">
+      <div class="spinner-border text-warning" role="status">
+          <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <footer>
+
+    </footer>
     
 
 

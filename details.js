@@ -40,14 +40,14 @@ function fetchProductDetails(productId){
             description.textContent = product.description;
             //productDetailsContainer.appendChild(description);
 
-            const price = document.createElement('p');
-            price.classList.add( 'fw-bold', 'text-danger')
-            price.textContent = `Prezzo: ${product.price}€`;
+            const price = document.createElement('h4');
+            price.classList.add( 'fw-bold', 'text-warning-emphasis')
+            price.textContent = `${product.price}€`;
             //productDetailsContainer.appendChild(price);
 
             const addToCartButton = document.createElement('button');
-            addToCartButton.classList.add('btn', 'btn-outline-danger', 'my-1');
-            addToCartButton.textContent = 'BUY NOW';
+            addToCartButton.classList.add('btn', 'btn-outline-warning', 'text-dark', 'my-1');
+            addToCartButton.textContent = 'Add to Cart';
 
             cardBody.appendChild(title)
             cardBody.appendChild(brand)

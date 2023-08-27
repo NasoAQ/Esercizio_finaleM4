@@ -9,10 +9,17 @@
     border-bottom: 1px solid #00000036;
 }
 
-/* main {
-    display: flex;
-} */
+main {
+    margin-top: 80px;
+}
 
+#Lista {
+    display: none;
+}
+
+#spinner-container {
+    margin-top: 200px;
+}
 
 td {
     overflow: hidden;
