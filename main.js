@@ -5,12 +5,15 @@ const productsContainer = document.getElementById('products-container');
 
 spinnerContainer.classList.remove('d-none');
 
+const searchInput = document.getElementById('searchInputHome');
+let productsList = [];
+
 
 fetch(`${API_URL}` , {
-headers: {
-"Authorization": `Bearer ${token}`
-}
-})
+    headers: {
+        "Authorization": `Bearer ${token}`
+        }
+    })
     .then(response => response.json())
     .then(productList => {
         setTimeout(() => {
@@ -76,7 +79,6 @@ headers: {
     }
 
     function renderProducts(products) {
-
         productsContainer.innerHTML = '';
 
         products.forEach(product => {
@@ -86,31 +88,33 @@ headers: {
 
             col.appendChild(productCard)
             productsContainer.appendChild(col);
-        })
+        });
     }
 
     renderProducts(productList);
-})
+    })
     .catch(_error => {
-    console.log('Si è verificato un errore durante la richiesta');
-});
-
-
-// const deleteMethod = {
-//     method: 'DELETE',
-//     headers: {
-//         "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU0N2M5ZGRmZmI4YjAwMTQ0MTNiOWYiLCJpYXQiOjE2OTI2OTU3MDksImV4cCI6MTY5MzkwNTMwOX0.axZpS7dRbLk519HLKSPjQU8qtZSRkC9yRx42oAu_n1c",
-//         'Content-type': 'application/json; charset=UTF-8'
-//         }
-// }
-
-// fetch(API_URL, deleteMethod)
-
-// .then(res => res.json())
-// .then(data => console.log(data))
-// .catch(err => console.log(err))
+        console.log('Si è verificato un errore durante la richiesta');
+    });
 
 function addUser() {
     window.location.href = 'product-form.html' 
    }
+
+   searchInput.addEventListener('input', () => {
+    const searchText = searchInput.value.trim().toLowerCase();
+
+    if (searchText.length >= 3) {
+        // Filtra i prodotti in base al testo di ricerca
+        const filteredProducts = productsList.filter(product =>
+            product.name.toLowerCase().includes(searchText)
+        );
+
+        // Aggiorna la visualizzazione con i prodotti filtrati
+        rebderProducts(filteredProducts);
+    } else {
+        // Se il testo di ricerca è troppo breve, mostra tutti i prodotti
+        rebderProducts(productsList);
+    }
+});
 
