@@ -171,6 +171,7 @@ async function fetchProducts() {
     }
 }
 
+//Funzione per creare gli elementi in tabella
 function displayProducts(products) {
   
     const tableBody = document.getElementById('products-table-body');

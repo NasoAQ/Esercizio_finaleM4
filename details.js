@@ -9,6 +9,7 @@ spinnerContainer.classList.remove('d-none');
 // Chiamata alla funzione per recuperare e visualizzare i dettagli del prodotto
 fetchProductDetails(productId);
 
+// Funzione per creare la card
 function fetchProductDetails(productId){
     fetch(`${API_URL}${productId}` , {
     headers: {
@@ -74,7 +75,7 @@ function fetchProductDetails(productId){
             console.log('Si è verificato un errore durante la richiesta dei dettagli del prodotto');
         });
     }
-
+// Funzione per reinderizzare nella pagina di gestione
 function addUser() {
     window.location.href = 'product-form.html' 
     }

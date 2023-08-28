@@ -8,6 +8,7 @@ spinnerContainer.classList.remove('d-none');
 const searchInput = document.getElementById('searchInputHome');
 let productsList = [];
 
+//Funzione per creare la card
 function createProductCard(product) {
 
     const card = document.createElement('div');
@@ -62,10 +63,12 @@ function createProductCard(product) {
 
 }
 
+//Funzione per reindirizzare nella pagina dettagli
 function goDetails(productId) {
     window.location.href = `dettagli.html?_id=${productId}`;
 }
 
+//Funzione per disporre le card 
 function renderProducts(products) {
     productsContainer.innerHTML = '';
 
@@ -79,41 +82,40 @@ function renderProducts(products) {
     });
 }
 
+//Chiamata fetch per recuperare i prodotti da mostrare
 fetch(`${API_URL}` , {
     headers: {
         "Authorization": `Bearer ${token}`
-        }
-    })
-    .then(response => response.json())
-    .then(productList => {
-        setTimeout(() => {
-            spinnerContainer.classList.add('d-none');
-        }, 500);
+    }
+})
+.then(response => response.json())
+.then(productList => {
+    spinnerContainer.classList.add('d-none');
         
-        productsList = productList
-
-        searchInput.addEventListener('input', () => {
-            const searchText = searchInput.value.trim().toLowerCase();
+    productsList = productList
+    //Listener per il campo di ricerca
+    searchInput.addEventListener('input', () => {
+        const searchText = searchInput.value.trim().toLowerCase();
             
-                if (searchText.length >= 3) {
-                    // Filtra i prodotti in base al testo di ricerca
-                    const filteredProducts = productsList.filter(product =>
-                        product.brand.toLowerCase().includes(searchText)
-                    );
+            if (searchText.length >= 3) {
+                // Filtra i prodotti in base al testo di ricerca
+                const filteredProducts = productsList.filter(product =>
+                    product.brand.toLowerCase().includes(searchText)
+                );
             
-                    // Aggiorna la visualizzazione con i prodotti filtrati
-                    renderProducts(filteredProducts);
-                } else {
+                // Aggiorna la visualizzazione con i prodotti filtrati
+                renderProducts(filteredProducts);
+            } else {
                     // Se il testo di ricerca è troppo breve, mostra tutti i prodotti
-                    renderProducts(productsList);
-                }
-            });
-    renderProducts(productList);
-    })
-    .catch(_error => {
-        console.log('Si è verificato un errore durante la richiesta');
+                renderProducts(productsList);
+            }
     });
-
+    renderProducts(productList);
+})
+.catch(_error => {
+    console.log('Si è verificato un errore durante la richiesta');
+});
+//Funzione per reindirizzare nella pagina di gestione
 function addUser() {
     window.location.href = 'product-form.html' 
    }
