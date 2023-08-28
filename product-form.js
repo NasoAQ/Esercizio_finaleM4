@@ -381,6 +381,25 @@ searchInput.addEventListener('input', () => {
     }
 });
 
+const backToTopButton = document.getElementById('backToTopButton');
+
+// Mostra il pulsante quando l'utente scende oltre una certa altezza
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        backToTopButton.classList.add('show');
+    } else {
+        backToTopButton.classList.remove('show');
+    }
+});
+   
+// Torna all'inizio quando il pulsante viene cliccato
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Scorrimento fluido
+    });
+});
+
 fetchProducts() 
 
 //displayProducts(products);
