@@ -17,9 +17,9 @@ function fetchProductDetails(productId){
     })
         .then(response => response.json())
         .then(product => {
-            setTimeout(() => {
+            
                 spinnerContainer.classList.add('d-none');
-            }, 500)
+            
             const productDetailsContainer = document.getElementById('product-details-container');
             
             const card = document.createElement('div');
@@ -53,6 +53,9 @@ function fetchProductDetails(productId){
             const addToCartButton = document.createElement('button');
             addToCartButton.classList.add('btn', 'btn-outline-warning', 'text-dark', 'my-1');
             addToCartButton.textContent = 'Add to Cart';
+            addToCartButton.addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
 
             cardBody.appendChild(title)
             cardBody.appendChild(brand)
@@ -70,5 +73,9 @@ function fetchProductDetails(productId){
         .catch(error => {
             console.log('Si è verificato un errore durante la richiesta dei dettagli del prodotto');
         });
+    }
+
+function addUser() {
+    window.location.href = 'product-form.html' 
     }
         

@@ -181,14 +181,14 @@ function displayProducts(products) {
       const row = `
         <tr>
           <td>${product._id}</td>
-          <td>${product.name}</td>
+          <td><a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" href="dettagli.html?_id=${product._id}">${product.name}</a></td>
           <td>${product.description}</td>
           <td>${product.brand}</td>
           <td>${product.imageUrl}</td>
           <td>${product.price} €</td>
           <td>
             <!-- Inserire pulsanti per modifica e cancellazione -->
-            <button type="reset" class="delete-button my-btn btn btn-outline-danger" data-product-id="${product._id}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <button type="reset" class="delete-button my-btn btn btn-outline-danger" data-product-id="${product._id}" data-bs-toggle="tooltip" title="Cancella" placement="top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
             <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
           </svg></button>
