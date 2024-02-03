@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    background-color: #fafafa;
+    border-bottom: 1px solid #00000036;
+}
+
+footer {
+    background-color: #fafafa;
+    border-top: 1px solid #00000036;
+}
+
+main {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+#Lista {
+    display: none;
+}
+
+#Form {
+    margin-top: 80px;
+}
+
+#spinner-container {
+    margin-top: 100px;
+}
+
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100px;
+}
+
+.my-btn {
+    padding: 5px;
+    border-radius: 0;
+}
+
+#product-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.dtlCard {
+    width: 18rem;
+}
+
+.back-to-top-button {
+    display: none;
+    position: fixed;
+    bottom: 70px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    background-color: #FFC107;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+}
+
+.back-to-top-button.show {
+    display: block;
+}

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Gestione prodotti</title>
+</head>
+<body>
+
+      <div id="deleteModal" class="modal fade" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">Conferma Cancellazione</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Sei sicuro di voler eliminare questo prodotto?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-dark" data-bs-dismiss="modal" id="cancelDelete">Annulla</button>
+              <button type="button" class="btn btn-danger" id="confirmDelete">Conferma Cancellazione</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div id="editModal" class="modal fade" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="editModalLabel">Conferma Modifica</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  Sei sicuro di voler confermare la modifica di questo prodotto?
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-dark" data-bs-dismiss="modal" id="cancelEdit">Annulla</button>
+                  <button type="button" class="btn btn-success" id="confirmEdit">Conferma Modifica</button>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div id="addModal" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="addModalLabel">Conferma Aggiunta Prodotto</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  Sei sicuro di voler aggiungere questo prodotto?
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelAdd">Annulla</button>
+                  <button type="button" class="btn btn-warning" id="confirmAdd">Conferma Aggiunta</button>
+              </div>
+          </div>
+      </div>
+    </div>
+        
+    <header>
+        <nav class="navbar fixed-top">
+            <div class="container">
+              <a class="navbar-brand" href="index.html">
+                <img src="anason-22-8-2023.png" alt="logo" width="150" height="40">
+              </a>
+              <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" href="#">Lista</a>
+              <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" href="#PROVA">Form</a>
+              <a href="index.html"><button class="btn btn-sm btn-outline-dark">Catalogo</button></a>
+            </div>
+            
+          </nav>
+    </header>
+
+    <main id="Lista" class="container">
+
+        <div id="success-alert" class="alert alert-warning d-none" role="alert">
+          Prodotto inserito con successo!
+        </div>
+        
+        <div id="delete-alert" class="alert alert-danger d-none" role="alert">
+          Prodotto eliminato con successo!
+        </div>
+        
+        <div id="edit-alert" class="alert alert-success d-none" role="alert">
+          Prodotto modificato con successo!
+        </div>
+
+        <h2>Prodotti inseriti</h2>
+        <form class="d-flex" role="search">
+          <input id="searchInput" class="my-search form-control me-2 w-50" type="search" placeholder="Cerca per brand" aria-label="Search">
+          <button class="my-btn btn btn-outline-dark" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg></button>
+        </form>
+
+        <div class="table-container table-responsive">
+
+        <table class="table table-striped table-sm">
+  
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Descrizione</th>
+              <th>Brand</th>
+              <th>Image</th>
+              <th>Prezzo</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+  
+          <tbody id="products-table-body">
+  
+          </tbody>
+  
+  
+        </table>
+
+        </div>
+
+        <div id="PROVA"></div>
+
+        <div id="Form" class="container">
+
+        <h2>Compila il form per aggiungere o modificare un prodotto</h2>
+        
+
+        <form id="product-form" class="" novalidate>
+  
+          <div class="mb-3">
+            <label for="name" class="form-label">Nome prodotto</label>
+            <input type="text" placeholder="Example: Jordan 1" class="form-control" id="name" required>
+            <span class="text-danger" id="name-error"></span>
+          </div>
+  
+          <div class="mb-3">
+            <label for="description" class="form-label">Descrizione</label>
+            <input type="text" placeholder="Example: Color blue" class="form-control" id="description" required>
+            <span class="text-danger" id="description-error"></span>
+          </div>
+  
+          <div class="mb-3">
+            <label for="brand" class="form-label">Brand</label>
+            <input type="text" placeholder="Example: Nike" class="form-control" id="brand" required>
+            <span class="text-danger" id="brand-error"></span>
+          </div>
+  
+          <div class="mb-3">
+            <label for="imageUrl" class="form-label">imageUrl</label>
+            <input type="text" placeholder="https://www.example.com" class="form-control" id="imageUrl" required>
+            <span class="text-danger" id="imageUrl-error"></span>
+          </div>
+          
+          <div class="mb-3">
+            <label for="price" class="form-label">Prezzo</label>
+            <input type="number" placeholder="Example: 100" class="form-control" id="price" required>
+            <span class="text-danger" id="price-error"></span>
+          </div>
+  
+          <button id="add-button" type="submit" class="btn btn-warning">Aggiungi</button>
+          <button id="save-edit-button" type="submit" class="btn btn-success">Modifica</button>
+  
+        </form>
+  
+        </div>
+
+    </main>
+
+    <div id="spinner-container" class="d-flex justify-content-center d-none">
+      <div class="spinner-border text-warning" role="status">
+          <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <button id="backToTopButton" class="back-to-top-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+      </svg>
+    </button>
+
+    <footer class="footer mt-auto py-3 bg-light">
+      <div class="container d-flex justify-content-evenly align-items-center">
+        <span class="text-muted">Anason shoes company <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-c-circle" viewBox="0 0 16 16">
+          <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0 1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091 0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029 2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512Z"/>
+        </svg></span>
+        <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" href="https://github.com/NasoAQ" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        </svg></a>
+      </div>
+    </footer>
+    
+
+
+
+
+    <script src="bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="product-form.js"></script>
+</body>
+</html>
